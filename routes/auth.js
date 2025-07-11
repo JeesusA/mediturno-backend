@@ -19,6 +19,7 @@ router.post('/register', async (req, res) => {
     await user.save();
     res.status(201).json({ message: 'Usuario registrado' });
   } catch (err) {
+    console.error('ERROR REGISTRO: ', err);
     res.status(500).json({ error: 'Error al registrar usuario' });
   }
 });
@@ -47,6 +48,7 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (err) {
+    console.error('ERROR LOGIN:', err);
     res.status(500).json({ error: 'Error al iniciar sesión' });
   }
 });
