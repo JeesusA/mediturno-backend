@@ -12,7 +12,14 @@ const turnoRoutes = require('./routes/turnos');
   const db = await connectDB();
   
   const app = express();
-  app.use(cors({ origin: process.env.FRONTEND_URL }));  // Permite peticiones desde tu frontend
+  app.use(cors({
+    origin: [
+      'http://localhost:5173',
+      'https://mediturno-frontend.vercel.app',  // AGREGA aquí tu dominio de Vercel
+    ],
+    credentials: true
+  }));
+
   app.use(express.json());                              // Parseo de JSON en el body
   app.locals.db = db;                                   // Hago disponible la DB en req.app.locals.db
 
