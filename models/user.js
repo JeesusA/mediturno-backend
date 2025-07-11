@@ -1,21 +1,28 @@
-// models/user.js – Operaciones sobre la colección “users”
-
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-module.exports = {
-  // Busca un usuario por email
-  findByEmail: (db, email) =>
-    db.collection('users').findOne({ email }),
+const userSchema = new mongoose.Schema({
+  name:      { type: String, required: true },
+  email:     { type: String, required: true, unique: true },
+  password:  { type: String, required: true },
+  role:      { type: String, enum: ['paciente', 'medico'], required: true }
+});
 
-  // Crea un usuario nuevo, guardando la contraseña hasheada
-  create: async (db, { name, email, password, role }) => {
-    const hash = await bcrypt.hash(password, 10);
-    const result = await db.collection('users').insertOne({
-      name,
-      email,
-      password: hash,
-      role
-    });
-    return result;
+// Hashea la contraseña antes de guardar el usuario
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  try {
+    const hash = await bcrypt.hash(this.password, 10);
+    this.password = hash;
+    next();
+  } catch (err) {
+    next(err);
   }
+});
+
+// Métodos de instancia
+userSchema.methods.comparePassword = function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
 };
+
+module.exports = mongoose.model('User', userSchema);
