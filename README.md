@@ -12,9 +12,11 @@ Este repositorio contiene el **backend** de MediTurno, la API REST desarrollada 
 ---
 
 ## 📸 Ejemplo de uso/API
-
+**Registro de paciente para demo**
 ![Registro de paciente para demostración](./screenshots/registro_paciente.png)
+**Login de paciente recien creado**
 ![Login de paciente recien registrado](./screenshots/login_paciente.png)
+**Obtener a los medicos**
 ![Metodo GET para obtener médicos](./screenshots/get_medicos.png)
 
 ---
