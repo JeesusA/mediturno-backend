@@ -15,13 +15,13 @@ const turnoRoutes = require('./routes/turnos');
   app.use(cors({
     origin: [
       'http://localhost:5173',
-      'https://mediturno-frontend.vercel.app',  // AGREGA aquí tu dominio de Vercel
+      'https://mediturno-frontend.vercel.app',
     ],
     credentials: true
   }));
 
   app.use(express.json());                              // Parseo de JSON en el body
-  app.locals.db = db;                                   // Hago disponible la DB en req.app.locals.db
+  app.locals.db = db;                                   
 
   // Rutas de autenticación
   app.use('/api/auth', authRoutes);

@@ -55,7 +55,7 @@ router.put('/:id', authenticate, async (req, res) => {
     if (turno.estado !== 'pendiente') {
       return res.status(400).json({ error: 'Solo se pueden editar turnos pendientes.' });
     }
-    // Solo si faltan más de 2 horas (puedes cambiarlo)
+    // Solo si faltan más de 2 horas
     const now = new Date();
     const turnoDate = new Date(`${turno.fecha}T${turno.hora}`);
     const diffMs = turnoDate.getTime() - now.getTime();

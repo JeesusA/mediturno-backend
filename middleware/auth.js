@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 
-// Middleware para autorización por rol (opcional, si lo usas)
+// Middleware para autorización por rol
 exports.authorize = (allowedRoles = []) => {
   return (req, res, next) => {
     const authHeader = req.headers.authorization || '';
